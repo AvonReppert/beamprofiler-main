@@ -162,7 +162,7 @@ class DcxCamera:
     IS_EXPOSURE_CMD_GET_EXPOSURE = 7
     IS_EXPOSURE_CMD_SET_EXPOSURE = 12
 
-    def __init__(self, dll_path: Path | None = None) -> None:
+    def __init__(self, dll_path: Path | None = None, camera_id: int = 0) -> None:
         self._dll_path = dll_path or DCX_DLL_PATH
         if not self._dll_path.exists():
             raise RuntimeError(f"DCx SDK DLL not found: {self._dll_path}")
@@ -171,7 +171,7 @@ class DcxCamera:
         self._lib = ctypes.WinDLL(str(self._dll_path))
         self._configure_signatures()
 
-        self._handle = ctypes.c_int(0)
+        self._handle = ctypes.c_int(camera_id | 0x8000 if camera_id > 0 else 0)
         self._image_ptr = ctypes.c_void_p()
         self._image_id = ctypes.c_int(0)
         self.width = SENSOR_WIDTH_PIXELS
@@ -182,6 +182,70 @@ class DcxCamera:
         self._sensor_info = DcxSensorInfo()
 
         self._open()
+
+    @staticmethod
+    def get_num_cameras(dll_path: Path | None = None) -> int:
+        """Return the number of connected DCx cameras."""
+        p = dll_path or DCX_DLL_PATH
+        if not p.exists():
+            return 0
+        os.add_dll_directory(str(p.parent))
+        lib = ctypes.WinDLL(str(p))
+        lib.is_GetNumberOfCameras.argtypes = [ctypes.POINTER(ctypes.c_int)]
+        lib.is_GetNumberOfCameras.restype = ctypes.c_int
+        num = ctypes.c_int(0)
+        if lib.is_GetNumberOfCameras(ctypes.byref(num)) != 0:
+            return 0
+        return num.value
+
+    @staticmethod
+    def list_cameras(dll_path: Path | None = None) -> list[tuple[int, str]]:
+        """Return a list of (device_id, serial_number) for each connected camera."""
+        p = dll_path or DCX_DLL_PATH
+        if not p.exists():
+            return []
+        os.add_dll_directory(str(p.parent))
+        lib = ctypes.WinDLL(str(p))
+        lib.is_GetNumberOfCameras.argtypes = [ctypes.POINTER(ctypes.c_int)]
+        lib.is_GetNumberOfCameras.restype = ctypes.c_int
+        num = ctypes.c_int(0)
+        if lib.is_GetNumberOfCameras(ctypes.byref(num)) != 0 or num.value == 0:
+            return []
+        n = num.value
+
+        class UC480_CAMERA_INFO(ctypes.Structure):
+            _fields_ = [
+                ("dwCameraID", ctypes.c_ulong),
+                ("dwDeviceID", ctypes.c_ulong),
+                ("dwSensorID", ctypes.c_ulong),
+                ("dwInUse", ctypes.c_ulong),
+                ("SerNo", ctypes.c_char * 16),
+                ("Model", ctypes.c_char * 16),
+                ("dwStatus", ctypes.c_ulong),
+                ("dwReserved", ctypes.c_ulong * 2),
+                ("FullModelName", ctypes.c_char * 32),
+                ("dwReserved2", ctypes.c_ulong * 5),
+            ]
+
+        class UC480_CAMERA_LIST(ctypes.Structure):
+            _fields_ = [
+                ("dwCount", ctypes.c_ulong),
+                ("uci", UC480_CAMERA_INFO * n),
+            ]
+
+        cam_list = UC480_CAMERA_LIST()
+        cam_list.dwCount = n
+        lib.is_GetCameraList.argtypes = [ctypes.POINTER(UC480_CAMERA_LIST)]
+        lib.is_GetCameraList.restype = ctypes.c_int
+        if lib.is_GetCameraList(ctypes.byref(cam_list)) != 0:
+            return []
+        result: list[tuple[int, str]] = []
+        for i in range(cam_list.dwCount):
+            info = cam_list.uci[i]
+            dev_id = int(info.dwDeviceID)
+            serial = info.SerNo.split(b"\0", 1)[0].decode("ascii", errors="ignore").strip()
+            result.append((dev_id, serial))
+        return result
 
     def _configure_signatures(self) -> None:
         self._lib.is_InitCamera.argtypes = [ctypes.POINTER(ctypes.c_int), ctypes.c_void_p]
@@ -1082,9 +1146,10 @@ class AcquisitionThread(QtCore.QThread):
     camera_ready = QtCore.Signal(object)
     error_occurred = QtCore.Signal(str)
 
-    def __init__(self, pixel_size_um: float, parent: QtCore.QObject | None = None) -> None:
+    def __init__(self, pixel_size_um: float, camera_id: int = 0, parent: QtCore.QObject | None = None) -> None:
         super().__init__(parent)
         self.pixel_size_um = pixel_size_um
+        self._camera_id = camera_id
         self._lock = Lock()
         self._desired_running = True
         self._average_images = 1
@@ -1185,7 +1250,7 @@ class AcquisitionThread(QtCore.QThread):
         applied_gain: float | None = None
 
         try:
-            camera = DcxCamera()
+            camera = DcxCamera(camera_id=self._camera_id)
 
             _, average_images, desired_exposure_ms, desired_gain = self._snapshot_config()
             if desired_exposure_ms is None:
@@ -1255,9 +1320,13 @@ class AcquisitionThread(QtCore.QThread):
 class BeamProfilerApp(QtWidgets.QMainWindow):
     history_length = 180
 
-    def __init__(self) -> None:
+    def __init__(self, camera_id: int = 0) -> None:
         super().__init__()
-        self.setWindowTitle("Thorlabs DCC1545M-GL Beamprofiler")
+        self._camera_id = camera_id
+        title = "Thorlabs DCC1545M-GL Beamprofiler"
+        if camera_id > 0:
+            title += f" — Camera {camera_id}"
+        self.setWindowTitle(title)
 
         self.position_x_history: list[float] = []
         self.position_y_history: list[float] = []
@@ -1413,7 +1482,7 @@ class BeamProfilerApp(QtWidgets.QMainWindow):
 
         self._apply_styles()
 
-        self.acquisition_thread = AcquisitionThread(pixel_size_um=PIXEL_SIZE_UM, parent=self)
+        self.acquisition_thread = AcquisitionThread(pixel_size_um=PIXEL_SIZE_UM, camera_id=self._camera_id, parent=self)
         self.acquisition_thread.frame_ready.connect(self._enqueue_frame)
         self.acquisition_thread.status_changed.connect(self._show_status)
         self.acquisition_thread.camera_ready.connect(self._handle_camera_state)
@@ -2417,7 +2486,21 @@ class BeamProfilerApp(QtWidgets.QMainWindow):
 
 def main() -> int:
     app = QtWidgets.QApplication(sys.argv)
-    window = BeamProfilerApp()
+    cameras = DcxCamera.list_cameras() if DCX_BACKEND_AVAILABLE else []
+    camera_id = 0
+    if len(cameras) > 1:
+        items = [f"{serial}  (Camera {cam_id})" for cam_id, serial in cameras]
+        choice, ok = QtWidgets.QInputDialog.getItem(
+            None, "Select Camera",
+            f"{len(cameras)} cameras detected. Choose one:",
+            items, 0, False,
+        )
+        if not ok:
+            return 0
+        camera_id = cameras[items.index(choice)][0]
+    elif len(cameras) == 1:
+        camera_id = cameras[0][0]
+    window = BeamProfilerApp(camera_id=camera_id)
     window.showMaximized()
     return app.exec()
 

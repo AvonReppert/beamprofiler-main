@@ -2,15 +2,14 @@
 numpy>=2.0
 PySide6>=6.8
 pyqtgraph>=0.13
+
+# Snapshot export (HDF5 via xarray)
 xarray>=2024.0
 h5netcdf>=1.3
+
+# Analysis figure with Gaussian fits
 matplotlib>=3.8
 scipy>=1.12
-
-# Optional IDS backend packages supplied by the IDS Peak SDK installer
-ids-peak>=1.13.0
-ids-peak-common>=1.1.0
-ids-peak-icv>=1.0.0
 
 # The Thorlabs DCC1545M-GL backend uses the local DCx / uc480 SDK via ctypes
 # and does not require an additional pip package.
