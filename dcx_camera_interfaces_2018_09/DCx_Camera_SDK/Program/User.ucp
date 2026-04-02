@@ -1,0 +1,35 @@
+
+[DISPLAY]
+PIXEL_FORMAT        = 0            // 0 = RGB32, see uc480.h for defined formats
+PIXEL_CONVERTER     = 0            // 0 = Normal, 1 = High
+RENDER_MODE         = 1            // 1 = IS_SET_DM_DIB, 4 = IS_SET_DM_DIRECT3D, see uc480.h for defined render modes
+FIT_TO_WINDOW       = 0            // 0 = No scaling, 1 = Scale image to window
+
+
+[TIMING]
+PIXELCLOCK          = 30           // MHZ
+FRAMERATE           = 100          // 0 = min, 100 = max
+EXPOSURE            = 50           // 0 = min, 100 = max
+
+
+[COLOR]
+CORRECTION_FACTOR   = 100          // 0 = 0.0, 100 = 1.0
+SATURATION_U        = 100          // 0 = 0.0, 200 = 2.0
+SATURATION_V        = 100          // 0 = 0.0, 200 = 2.0
+
+
+[IMAGE_PARAMETERS]
+EDGE_ENHANCEMENT    = 0            // 0 = disable, 1 = weak, 2 = strong
+GAMMA               = 100          // 100 = 1.0, 220 = 2.2
+
+
+[AES_AGC_AFR]
+EXPOSURE            = 0            // 1 = on, 0 = Off
+GAIN                = 0            // 1 = on, 0 = Off
+FRAMERATE           = 0            // 1 = on, 0 = Off
+
+
+[AWB]
+WHITEBALANCE        = 0            // 1 = on, 0 = Off
+
+

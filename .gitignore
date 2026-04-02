@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+.venv/
+.vscode/
+
+# Snapshot output files
+beam_snapshot.*

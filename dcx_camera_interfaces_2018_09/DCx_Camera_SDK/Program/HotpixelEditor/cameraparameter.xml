@@ -1,0 +1,256 @@
+<!DOCTYPE CameraSettings>
+<CameraSettings>
+ <Sensor ID="0x004A">
+  <Timing framerate="15.948217" exposure="0" pixelclock="30"/>
+  <Gain master="75" red="0" blue="0" green="0"/>
+ </Sensor>
+ <Sensor ID="0x004B">
+  <Timing framerate="15.948217" exposure="0" pixelclock="30"/>
+  <Gain master="75" red="0" blue="0" green="0"/>
+ </Sensor>
+ 
+ <Sensor ID="0x0011">
+  <Timing framerate="22.0379" exposure="40.343875" pixelclock="8"/>
+  <Gain master="0" red="100" blue="100" green="100"/>
+ </Sensor>
+ <Sensor ID="0x0010">
+  <Timing framerate="13.773687" exposure="64.6844" pixelclock="5"/>
+  <Gain master="70" red="0" blue="0" green="0"/>
+ </Sensor>
+ 
+ <Sensor ID="0x0013">
+  <Timing framerate="2.000203" exposure="499.869214" pixelclock="14"/>
+  <Gain master="55" red="51" blue="53" green="50"/>
+ </Sensor>
+ <Sensor ID="0x0012">
+  <Timing framerate="2.00045" exposure="499.807286" pixelclock="14"/>
+  <Gain master="100" red="0" blue="0" green="0"/>
+ </Sensor>
+ 
+ <Sensor ID="0x0051">
+  <Timing framerate="3.33" exposure="199.9" pixelclock="10"/>
+  <Gain master="30" red="24" blue="29" green="0"/>
+ </Sensor>
+ <Sensor ID="0x0050">
+  <Timing framerate="3.33" exposure="199.9" pixelclock="10"/>
+  <Gain master="30" red="0" blue="0" green="0"/>
+ </Sensor>
+ 
+ <Sensor ID="0x0055">
+  <Timing framerate="3.33" exposure="199.9" pixelclock="10"/>
+  <Gain master="30" red="24" blue="29" green="0"/>
+ </Sensor>
+ <Sensor ID="0x0054">
+  <Timing framerate="3.33" exposure="199.9" pixelclock="10"/>
+  <Gain master="30" red="0" blue="0" green="0"/>
+ </Sensor>
+ 
+ <Sensor ID="0x0067">
+  <Timing framerate="3.33" exposure="199.9" pixelclock="10"/>
+  <Gain master="30" red="24" blue="29" green="0"/>
+ </Sensor>
+ <Sensor ID="0x0066">
+  <Timing framerate="3.33" exposure="199.9" pixelclock="10"/>
+  <Gain master="30" red="0" blue="0" green="0"/>
+ </Sensor>
+ 
+ <Sensor ID="0x006D">
+  <Timing framerate="0.769269" exposure="199.754933" pixelclock="10"/>
+  <Gain master="100" red="0" blue="0" green="0"/>
+ </Sensor>
+ <Sensor ID="0x006C">
+  <Timing framerate="0.769269" exposure="199.754933" pixelclock="10"/>
+  <Gain master="100" red="0" blue="0" green="0"/>
+ </Sensor>
+ 
+ <Sensor ID="0x0002">
+  <Timing framerate="4.03034" exposure="248.118" pixelclock="10"/>
+  <Gain master="22" red="0" blue="0" green="0"/>
+ </Sensor>
+ <Sensor ID="0x0001">
+  <Timing framerate="3.362757" exposure="210.89" pixelclock="12"/>
+  <Gain master="48" red="0" blue="0" green="0"/>
+ </Sensor>
+ 
+ <Sensor ID="0x0004">
+  <Timing framerate="7.086519" exposure="137.123" pixelclock="11"/>
+  <Gain master="40" red="60" blue="40" green="0"/>
+ </Sensor>
+ <Sensor ID="0x0003">
+  <Timing framerate="7.086519" exposure="137.123" pixelclock="11"/>
+  <Gain master="100" red="0" blue="0" green="0"/>
+ </Sensor>
+ <Sensor ID="0x0008">
+  <Timing framerate="3.25115" exposure="299.887467" pixelclock="15"/>
+  <Gain master="0" red="70" blue="70" green="70"/>
+ </Sensor>
+
+ <Sensor ID="0x000a">
+  <Timing framerate="4.95552" exposure="199.998" pixelclock="19"/>
+  <Gain master="87" red="43" blue="45" green="20"/>
+ </Sensor>
+
+ <Sensor ID="0x000c">
+  <Timing framerate="2.7" exposure="160" pixelclock="20"/>
+  <Gain master="48" red="30" blue="30" green="30"/>
+ </Sensor>
+ <Sensor ID="0x000b">
+  <Timing framerate="1.5" exposure="460" pixelclock="20"/>
+  <Gain master="48" red="0" blue="0" green="0"/>
+ </Sensor>
+ 
+ <Sensor ID="0x003F">
+  <Timing framerate="2.133905" exposure="268.48675" pixelclock="24"/>
+  <Gain master="40" red="58" blue="49" green="0"/>
+ </Sensor>
+ <Sensor ID="0x003E">
+  <Timing framerate="1.777639" exposure="519.4051" pixelclock="20"/>
+  <Gain master="48" red="0" blue="0" green="0"/>
+ </Sensor>
+
+ <Sensor ID="0x0031">
+  <Timing framerate="3.330948" exposure="299.8944" pixelclock="10"/>
+  <Gain master="0" red="100" blue="100" green="95"/>
+ </Sensor>
+ <Sensor ID="0x0030">
+  <Timing framerate="3.330948" exposure="299.8944" pixelclock="10"/>
+  <Gain master="96" red="0" blue="0" green="0"/>
+ </Sensor>
+ 
+ <Sensor ID="0x0017">
+  <Timing framerate="2.482676" exposure="402.7781" pixelclock="20"/>
+  <Gain master="90" red="80" blue="60" green="20"/>
+ </Sensor>
+
+ <Sensor ID="0x005A">
+  <Timing framerate="1.47" exposure="206.08" pixelclock="10"/>
+  <Gain master="48" red="0" blue="0" green="0"/>
+ </Sensor>
+ 
+ <Sensor ID="0x005B">
+  <Timing framerate="1.47" exposure="206.08" pixelclock="10"/>
+  <Gain master="48" red="30" blue="30" green="30"/>
+ </Sensor>
+ 
+ <Sensor ID="0x0060">
+  <Timing framerate="1.47" exposure="206.08" pixelclock="10"/>
+  <Gain master="48" red="0" blue="0" green="0"/>
+ </Sensor>
+ 
+ <Sensor ID="0x0061">
+  <Timing framerate="1.47" exposure="206.08" pixelclock="10"/>
+  <Gain master="48" red="30" blue="30" green="0"/>
+ </Sensor>
+ 
+ <Sensor ID="0x0015">
+  <Timing framerate="3.001528" exposure="299.7428" pixelclock="10"/>
+  <Gain master="88" red="80" blue="60" green="20"/>
+ </Sensor>
+ <Sensor ID="0x0025">
+  <Timing framerate="3.001528" exposure="299.7428" pixelclock="10"/>
+  <Gain master="80" red="60" blue="40" green="0"/>
+ </Sensor>
+ 
+ <Sensor ID="0x006A">
+  <Timing framerate="3.310725" exposure="300.717060" pixelclock="80"/>
+  <Gain master="60" red="0" blue="0" green="0"/>
+ </Sensor>
+ <Sensor ID="0x006B">
+  <Timing framerate="3.310725" exposure="300.717060" pixelclock="80"/>
+  <Gain master="50" red="10" blue="10" green="10"/>
+ </Sensor>
+  <Sensor ID="0x0214">
+  <Timing framerate="3.310725" exposure="300.717060" pixelclock="80"/>
+  <Gain master="60" red="0" blue="0" green="0"/>
+ </Sensor>
+ 
+ <Sensor ID="0x009B">
+  <Timing framerate="2.5214" exposure="200" pixelclock="30"/>
+  <Gain master="65" red="50" blue="60" green="20"/>
+ </Sensor>
+ <Sensor ID="0x009A">
+  <Timing framerate="2.521051" exposure="200" pixelclock="30"/>
+  <Gain master="80" red="0" blue="0" green="0"/>
+ </Sensor>
+ 
+ <Sensor ID="0x0089">
+  <Timing framerate="3.300003" exposure="302.803125" pixelclock="8"/>
+  <Gain master="60" red="40" blue="30" green="0"/>
+ </Sensor>
+ <Sensor ID="0x0088">
+  <Timing framerate="3.290475" exposure="300.073125" pixelclock="8"/>
+  <Gain master="70" red="0" blue="0" green="0"/>
+ </Sensor>
+ 
+ <Sensor ID="0x0093">
+  <Timing framerate="3.300069" exposure="299.95125" pixelclock="8"/>
+  <Gain master="60" red="55" blue="45" green="0"/>
+ </Sensor>
+ <Sensor ID="0x0092">
+  <Timing framerate="3.300069" exposure="299.9994" pixelclock="10"/>
+  <Gain master="96" red="0" blue="0" green="0"/>
+ </Sensor>
+ 
+ <Sensor ID="0x0081">
+  <Timing framerate="2.800148" exposure="349.957" pixelclock="10"/>
+  <Gain master="70" red="60" blue="50" green="0"/>
+ </Sensor>
+ <Sensor ID="0x0080">
+  <Timing framerate="2.820206" exposure="349.957" pixelclock="10"/>
+  <Gain master="85" red="0" blue="0" green="0"/>
+ </Sensor>
+ 
+ <Sensor ID="0x0097">
+  <Timing framerate="3.040347" exposure="303.4298" pixelclock="20"/>
+  <Gain master="70" red="60" blue="40" green="0"/>
+ </Sensor>
+ <Sensor ID="0x0096">
+  <Timing framerate="2.821499" exposure="300" pixelclock="8"/>
+  <Gain master="70" red="0" blue="0" green="0"/>
+ </Sensor>
+ 
+ <Sensor ID="0x0099">
+  <Timing framerate="3.020199" exposure="300.3367" pixelclock="20"/>
+  <Gain master="30" red="30" blue="20" green="0"/>
+ </Sensor>
+ <Sensor ID="0x0098">
+  <Timing framerate="3.220985" exposure="280" pixelclock="20"/>
+  <Gain master="45" red="0" blue="0" green="0"/>
+ </Sensor>
+ 
+ <Sensor ID="0x009D">
+  <Timing framerate="3.193664" exposure="313.041524" pixelclock="21"/>
+  <Gain master="50" red="38" blue="50" green="22"/>
+ </Sensor>
+ <Sensor ID="0x009C">
+  <Timing framerate="3.041585" exposure="328.6936" pixelclock="20"/>
+  <Gain master="70" red="0" blue="0" green="0"/>
+ </Sensor>
+ 
+ <Sensor ID="0x0091">
+  <Timing framerate="3.300003" exposure="299.960375" pixelclock="8"/>
+  <Gain master="65" red="70" blue="50" green="0"/>
+ </Sensor>
+ <Sensor ID="0x0090">
+  <Timing framerate="3.300003" exposure="299.960375" pixelclock="8"/>
+  <Gain master="90" red="0" blue="0" green="0"/>
+ </Sensor>
+ 
+ <Sensor ID="0x0084">
+  <Timing framerate="3.050282" exposure="300.754750" pixelclock="20"/>
+  <Gain master="100" red="0" blue="0" green="0"/>
+ </Sensor>
+ <Sensor ID="0x0085">
+  <Timing framerate="3.010017" exposure="301.381250" pixelclock="20"/>
+  <Gain master="60" red="50" blue="40" green="0"/>
+ </Sensor>
+ 
+ <Sensor ID="0x0083">
+  <Timing framerate="3.300003" exposure="299.975625" pixelclock="8"/>
+  <Gain master="87" red="70" blue="62" green="30"/>
+ </Sensor>
+ <Sensor ID="0x0082">
+  <Timing framerate="3.300003" exposure="299.975625" pixelclock="8"/>
+  <Gain master="80" red="0" blue="0" green="0"/>
+ </Sensor>
+</CameraSettings>

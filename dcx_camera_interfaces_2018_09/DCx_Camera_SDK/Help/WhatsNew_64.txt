@@ -1,0 +1,596 @@
+======================================
+Date: March, 18th, 2016
+
+SDK version 4.80
+
+for product:  USB uc480 camera family
+              GigE uc480 camera family
+
+
+======================================
+Content:
+======================================
+- Notes on hardware compatibility
+- Notes on this driver release
+- Notes on the additional interfaces
+======================================
+
+
+
+#######################################################################
+Notes on hardware compatibility
+
+  Please note: All USB CMOS-cameras with USB board revision < 2.1 are not 
+  supported by driver versions > 3.10.
+  How can you check whether your camera is affected?
+
+  Check the serial number of your camera. If it is less than 
+  400 26 27000, your camera will not be compatible with driver 
+  versions > 3.10.
+
+  If your camera is not compatible with driver versions > 3.10, you can 
+  of course continue to use your present driver (up to version 2.40).
+
+
+  
+  Please note: 
+
+  The correct firmware of a GigE uc480 SE camera is automatically 
+  uploaded with driver versions >= 3.50. This process is only available 
+  if the firmware version on the camera is also >= 3.50. If not, The 
+  camera can not be opened and is labeled respectively in the 
+  uc480 Camera Manager. The firmware must be uploaded manually over the 
+  button 'Upload starter firmware'. The firmware file is located in the 
+  installation directory in the folder 'GigE Firmware'. Once updated with
+  the new firmware, the automatic upload is available for future updates. 
+
+
+  Please note:
+
+  We recommend not to change the DHCP configuration of the network adapter
+  while operating the uc480 cameras. If you encounter difficulties, you 
+  should reboot your computer system with the desired configuration.
+
+  
+  Please note:
+ 
+  The GigE-HE camera family is officially supported by driver version 
+  4.40.1 for the last time.
+  
+  The GigE-RE camera family is officially supported by driver version 
+  4.80.0 for the last time.
+
+  
+
+##########################################################################
+Notes on this release 4.80
+
+- Support of Windows 10
+
+- Support of the new USB3 CP Rev. 2 camera models SC0800G13C/M, 
+  SC1920G23C/M, SC2592G10C/M.
+  
+- Increased maximum possible frame rate of the USB3 CP Rev. 2 camera models
+  SC2048G23C/M/N and SC2048G11C/M/N.
+
+- Additional pixel clocks for the USB3 CP Rev. 2 camera models SC1283G12C/M
+  and resulting an increased maximum possible frame rate. 
+  
+- All USB3 CP Rev.2 camera models (except SC4912R12C) support I2C with the 
+  GPIOs.
+  
+- The USB3 firmware is no longer included in the driver, but stored on the
+  hard disk. Therefore the driver needs less main memory.
+  
+- In the Vertical AOI Merge Mode each line trigger can now cause a flash 
+  signal. 
+
+- The standby button in the uc480 Viewer is available for the C2592R14C.
+
+- The streaming dialog in the uc480 Viewer is available for the 
+  SC4216R12C/C2592R14C.
+  
+- Optimization and bugfixing.
+
+
+Please note: The internal image memory of the USB3 CP Rev. 2 camera family
+             can no longer be enabled/disabled when the camera is opened.   
+             This is only possible in the closed state. However, the setting
+             is saved permanently in the camera. The setting is no longer 
+             configured over the uc480 Viewer but over the uc480 Camera Manager.
+
+             Parameter files with image memory entries must be adjusted!
+
+Please note: When the pixel clock is changed while operating the SC4912R12C, 
+             there are sporadic reconnects. This problem increases with the 
+             camera temperature. It will be solved in the next SDK version.
+			 
+			 
+			 
+##########################################################################
+Notes on this release 4.72.2
+
+- Support of the new USB3 CP Rev. 2 camera family with memory that can be
+  enabled/disabled.
+  
+- New USB3 CP Rev. 2 camera models: SC1920G11C/M, SC1283G12C/M, SC1280G12C/M/N,
+  C1600G12C/M, SC1936G11C/M, SC2048G23C/M/N, SC2048G11C/M/N, SC2592R12M, 
+  SC2598R12C, SC4912R12C, SC4913R12C
+  
+- Support of the new GigE camera models ECC1936G11C/M
+  
+- Optimization and bugfixing
+
+- Slight blacklevel offset decrement of the C3840R12 and EC3840R12 camera 
+  models
+
+- New blacklevel offset calibration for the SC2048G23, SC2048G11, 
+  ECC2048G23 and ECC2048G11 camera models. Please note: The calibration 
+  data must be stored in the camera. The update has no effect on previously
+  manufactured cameras.
+  
+- New auto exposure feature "Peak white" to adjust the percentage of 
+  white pixels in the image.
+  
+- Vertical AOI merge mode:  
+  - Support of the trigger delay
+  - A constant flash (high/low) is now possible
+  - Optimization: No loss of lines between the merged images
+  
+  
+
+##########################################################################
+Notes on this release 4.60
+
+- Support of the new camera models SC1920G11C and SC1920G11M
+
+- Support of the new camera model SC4216R12C
+
+- Please note: Windows XP is no longer supported from this SDK version! 
+
+- The following camera models now support the freerun and line-triggered 
+  Vertical AOI Merge Mode: SC1280G12, SC1281G12, SC1282G12, SC1600G12,  
+                           SC1601G12, SC1602G12, SC2048G23 and SC2048G11  
+  
+- The following camera models now support the freerun Vertical AOI Merge Mode: 
+  EC1280G12, ECC1280G12, ECC2048G23 and ECC2048G11. The camera models 
+  ECC2048G23 and ECC2048G11 also support the software-triggered line mode.
+  
+- All USB3 camera families and the GigE-CP camera family now support a 
+  prescaler for the frame trigger. All models that support the Vertical AOI 
+  Merge Mode also support a prescaler for the line trigger.
+
+- All USB3 camera families and the GigE-LE and GigE-RE PoE camera families
+  now support a GPIO trigger for image capturing.
+  
+- The Camera Manager now marks unsupported camera models. 
+
+- New mode "Trusted Pairing" for all GigE camera families except ECC2048G23
+  and ECC2048G11: The camera configuration is preserved when the network 
+  connection is disrupted, as long as the camera is still powered. A fast 
+  reconnect is possible once the network connection is re-established.
+  
+- New mode "Passive Multicast" for all GigE camera families except ECC2048G23
+  and ECC2048G11: This mode allows client computers to receive the image stream 
+  from a camera that is opened by a master computer.
+  
+- The function is_RenderBitmap() can now rotate the image by 90, 180 and 270 
+  degrees.
+
+- The camera models SC1601G12 and SC1602G12 now support the multi integration 
+  mode.
+
+- The color models of the camera families C3840R12 and EC3840R12 now start with 
+  activated color correction. This can lead to slightly different colors.    
+
+
+
+##########################################################################
+Notes on this release 4.40.1
+
+- New camera models: SC1281G12C, SC1281G12M, SC1281G12N, SC1282G12C, 
+                     SC1282G12M, SC1282G12N, SC2595R12M, SC2596R12M, 
+                     SC2599R12C, SC259AR12C, ECC2048G23C, ECC2048G23M, 
+                     ECC2048G23N, ECC2048G11C, ECC2048G11M, ECC2048G11N,
+                     ECL2592R12M, ECL2598R12C, SC2048G11N, SC2048G23N
+					     
+- Support of Windows 8 and Windows 8.1
+
+- Support of the hardware pixel format RGB15 with all USB3 camera models
+
+- Support of the 10-Bit packed mode with all USB3 camera models
+
+- Support of the trigger burst mode with all USB3 camera models
+
+- New SDK function is_LUT() for configuring the hardware LUT and 
+  the new software LUT
+
+- New feature "Auto flash timing" 
+
+- Additional features for the function is_ParameterSet(): 
+  - A parameter set can be deleted 
+  - The existence of a parameter set can be queried
+  
+- is_Configuration: The thread to optimize the performance (IPO) can be
+                    disabled or enabled. 
+  
+- Camera Manager: New control to change the IPO thread setting
+
+- SC2048G23, SC2048G11:
+  - Implemented a finer increment for the exposure time
+  - Reduction of the minimum exposure time
+  - Support of 16x subsampling
+  - Increased the maximum framerate of the SC2048G11 to 80.91 FPS
+  - Increased the maximum framerate of the SC2048G23 to 152.21 FPS
+  - Corrections for the Vertical AOI merge mode:
+    - The order of the lines is now correct. The oldest line is the topmost 
+      line in the resulting image.
+    - If the vertical AOI merge mode is used with 2 line positions or the dual
+      exposure the images are seperated in 2 different areas. The debayering 
+      algorithm then works correctly.	
+	  
+- New features for the C2592R14C camera model:
+  - Support of the RGB15 hardware pixel formats
+  - Support of the YUV format
+  - Support of the Mono8 format
+  - New image format 800x480 with 30 FPS
+  - RAW image data can now be saved as JPEG
+  - Image effect (is_DeviceFeature)
+  - Auto focus zone (is_Focus)
+  - Digital zoom (is_Zoom)
+  - Sensor gamma (is_SetHardwareGamma)
+   
+- Support of the vertical AOI merge mode of the SC1280G12 camera models
+
+- Changes for the C1280G12, SC1280G12 and EC1280G12 camera models:
+  - New auto log mode
+  - Expanded log mode range 
+  - Improved image quality
+
+- New feature: Multi integration mode for the SC1600G12 camera models  
+  
+- Changes for the C1600G12, SC1600G12 and EC1600G12 camera models:
+  - New auto log mode
+  - Improved image quality
+  - New feature long term exposure
+  
+  - Please note: The internal sensor timing has been changed to improve 
+    the image qualitity. Therefore, the camera models C1600G12, SC1600G12 and 
+    EC1600G12 have a resulting framerate of 60.34 FPS instead of 61.5 FPS 
+    at 128 MHz
+    
+	
+
+##########################################################################
+Notes on this release 4.30
+
+- New camera models: SC2048G11C, SC2048G11M, C1600G12M, C1603G12M, C1604G12M,
+                     SC1600G12M, ECC1600G12M, EC1600G12M, ECL1600G12M,
+                     C2592R14C, D1360G12MR3, D1360G12CR3
+
+- First support of the C1600G12C camera family
+
+- Optimization of the camera model C2592R14C:
+  - Additional pixel clocks
+  - New VGA image format with double frame rate
+  - Lens correction for different color temperatures
+  
+- Support of the Vertical AOI Merge mode for the models ("linescan mode") of the 
+  SC2048G11 camera family: 
+  - The sensor AOI can be merged from 2 different line positions
+  - New, line-triggered modes
+ 
+- SC2048G11 camera family: The value of the temperature register can be read
+
+- Support of sensor specific functions for the models SC2048G11C and SC2048G11M:
+  - Sensor bit depth
+  - Sensor source gain
+  - Blacklevel reference
+  - Fixed pattern noise correction
+  - Dual exposure
+  - Multi AOI
+  
+- New 10-bit pixel formats (RAW, Mono, RGB/BGR)
+
+- New, packed 10-Bit pixel formats for USB3 cameras with 50% less bandwidth
+  
+- New Mono16 software renderer
+  
+- Support of the manual blacklevel for the camera models  
+  C2592R12C, SC2592R12C, EC2592R12C and C2598R12C, SC2598R12C, EC2598R12C
+   
+- Camera families GigE uc480 CP and GigE uc480 LE: A reset of the internal 
+  timestamp over an external signal is now possible
+  
+- New event and new message at the arrival of the first image data package
+  in the PC. For sensors with a global shutter the event/message can be used
+  to determine the end of the exposure time
+
+- Improvements and fixes for Windows 8
+
+- is_EdgeEnhancement(): Support of pixel formats with more than 8 bits
+
+- is_Measure(): Support of pixel formats with more than 8 bits, 
+                Support of sensor AOIs
+ 
+- Support of the .NET SDK interface. 
+
+
+
+##########################################################################
+Notes on this release 4.20
+
+- New USB2 camera models: C1280G12N, C1285G12N, C1286G12C, C1286G12M, 
+                          C1286G12N, D0640G12CR3, D0640G12MR3, D0768G12CR3,
+                          D0768G12MR3, D1024G13CR3, D1024G13MR3, D1600G12CR3,
+                          D1600G12MR3, D0640G13CR3, D0640G13MR3
+
+- New USB3 camera model:  SC1280G12N
+
+- New GigE camera models: EC1280G12N, EC1281G12N, EC1285G12C, EC1285G12M, 
+                          EC1285G12N, ED0640G12CR3, ED0640G12MR3, ED0768G12CR3,
+                          ED0768G12MR3, ED1024G13CR3, ED1024G13MR3, ED1600G12CR3,
+                          ED1600G12MR3, ED0640G13CR3, ED0640G13MR3
+						   				  		  
+- Support of the USB3 camera family under Windows-XP 32-Bit.
+
+- Support and optimization of the CCD Rev.3 camera families.
+
+- Stability and performance optimization of the USB3 camera family.
+
+- Support of the hardware features for USB3 cameras: 
+  Color conversion, gamma and LUT
+  
+- Transfer of USB3 status information (e.g. Timestamp).
+  
+- A new event/message indicates when the transfer speed of a USB3 
+  camera changes 
+  
+- Support of the serial interface of the USB3 camera family 
+  (Virtual COM port).
+   
+- Support of the USB3 PWM.
+  
+- New capture modes for GigE cameras: Post- and pre-trigger.
+  The image transfer to the computer can be deactivated. A capture
+  sequence is forced by a trigger signal. The images are captured into
+  the internal camera memory and can be accessed and transfered later 
+  via the new function is_ImageBuffer().  
+  
+- New pixel formats:
+  - 8-Bit RGB planar
+  - 12-Bit RGB
+  
+- Support of the new formats by the application uc480Viewer. 
+
+- New shutter modes for the C128xG12, SC128xG12 and EC128xG12 camera models: 
+  Global shutter with alternative timing, rolling shutter with global start.
+
+- Log mode for the C128xG12, SC128xG12 and EC128xG12 camera models: 
+  A linear/logarithmic response can be set in several steps ("Kneepoint HDR").
+
+- is_BlackLevel(): New function to control the black level. It replaces 
+                   is_SetBlCompensation() completely.
+				   
+- is_IO(): New commands to configure the GPIOs and the serial interface of 
+           the USB3 cameras.
+		   
+- New API function is_Measure() to calculate the sharpness of an image
+
+
+
+##########################################################################
+Notes on the additional interfaces 4.20
+
+LabVIEW
+
+- No changes
+
+
+
+##########################################################################
+Notes on this release 4.00
+
+- Support of USB3 under Windows 7. At the moment all other operating
+  systems are not supported!
+  
+- New USB3-CP camera models: SC0752G13C, SC0752G13M, SC1280G12C, SC1280G12M, 
+                             SC2592R12M, SC2598R12C.
+					
+- New USB2 camera models:    C2598R12C, C2599R12C
+
+- New GigE camera models:    EC2598R12C
+
+- Windows 2000 is no longer supported and the corresponding drivers are 
+  no longer installed.
+
+- Internal performance optimization of the De-Bayering algorithm.
+
+- New DirectRenderer mode using OpenGL. The functionality equals the 
+  Direct3D renderer functionality.
+
+- Multi-level edge enhancement using the new function is_EdgeEnhancement(). 
+  The function replaces is_SetEdgeEnhancement() completely.
+
+- Revision of the camera parameter set. The new function is_ParameterSet() 
+  saves/loads a parameter set to/from a file or the camera EEPROM. The
+  function replaces is_SaveParameters() and is_LoadParameters() completely.
+  The 2. parameter set is omitted and replaced by sensor specific parameters. 
+  The 2. parameter set can still be loaded with the deprecated function.
+  
+- Improved conversion of a raw bayer buffer to a de-bayered image with the
+  new function is_Convert().
+
+- New automatic white balance using the color temperature (Kelvin). 
+  New function is_AutoParameter().
+
+- Additional new functions:  
+
+  - is_PixelClock(): The function controls the pixel clock and replaces
+                     is_SetPixelClock() and is_GetPixelClockRange() completely.
+  
+  - is_DeviceInfo(): The function returns information about the specified device 
+                     and replaces is_GetEthDeviceInfo() completely. It is also 
+                     valid for USB3 devices.
+
+  - is_ImageFile(): The function provides load- and save functions for image files  
+                    and replaces the following functions completely: 
+                    is_LoadImage(), is_LoadImageMem, is_SaveImage(), 
+                    is_SaveImageMem(), is_SaveImageEx(), is_SaveImageMemEx()
+
+- All load- and save functions of the SDK now support unicode file names.
+
+- The setting of a negativ flash delay is now possible.
+
+- The image formats are now available for all CCD cameras.
+
+- Support of the hotpixel correction with 2×2 subsampling.
+
+- If desired, the uc480 Viewer now displays a cross hair.   
+
+  
+  
+##########################################################################
+Notes on the additional interfaces 4.00
+
+LabVIEW:
+
+- No changes
+
+
+
+##########################################################################
+Notes on this release 3.90
+
+
+- Support of new features of the camera families D2448G23, ED2448G23,
+  D1280G12 and ED1280G12:
+  - Fine exposure increment and extended exposure range
+  - Long exposure
+  - Additional test images
+  - 12 bit pixel formats for USB cameras
+  - Camera LUT for USB cameras
+  
+  
+- New operating mode „Boot-Boost“ for GigE cameras to open and close 
+  cameras more quickly
+  
+  
+- Optimization of the color conversion of the cameras raw data by using the
+  graphics adapter
+    
+  
+- Optimization of the color conversion of the cameras raw data by using all 
+  available processor cores (OpenMP)
+  
+ 
+- New parameters for the network bandwidth management: 
+  - Delay time for the first transfered image
+  - Transmission frequency of the image packets
+  
+  
+- New trigger mode "Burst Trigger" for GigE-SE and GigE-HE cameras:
+  For each trigger pulse n frames are transmitted by the camera
+
+  
+- Automatically load a set of parameters stored in the camera when opening 
+  the camera 
+  
+  
+- New AOI sequence mode for the 124x and 524x camera models
+
+
+- Pulse width modulation for GigE cameras
+
+
+- Additional image formats for CMOS and CCD cameras
+
+
+- JPEG and PNG files can now be loaded with the function is_LoadImage()
+
+
+- New tool to save an user defined hotpixel list in the camera
+  (uc480HotpixelEditor)
+  
+  
+- New tool to play video files (uc480Player)
+
+
+- New MJPEG AVI video codec
+
+
+- New function is_Configuration() to adjust global parameters 
+  - Setting of OpenMP
+  - Setting of the CPU idle states
+  - Parameter set when opening the camera
+ 
+ 
+- New Function is_Trigger() to adjust the Burst Trigger mode
+
+
+- New function is_Exposure(): 
+  This function replaces is_GetExposureRange() and is_SetExposureTime()
+
+  
+- New function is_CaptureStatus(): 
+  This function replaces is_GetCaptureErrorInfo() and 
+  is_ResetCaptureErrorInfo()
+	
+	
+- New function is_BootBoost(): 
+  Management of the new "Boot-Boost" functionality of GigE cameras
+
+  
+- New function is_IO(): 
+  This function replaces the flash- and IO-functions is_SetIO(), 
+  is_SetIOMask(), is_SetLED(), is_GetGlobalFlashDelays(), 
+  is_SetFlashDelay() and is_SetFlashStrobe()
+  
+  
+- Please note:
+
+  is_IpConfig(): The byte order was changed for the GigE network configuration.
+  An IP address must now be passed in the Big-Endian format
+
+
+
+##########################################################################
+Notes on the additional interfaces 3.90
+
+
+LabVIEW:
+
+- Support of 64 bit
+
+
+
+#######################################################################
+Notes on this release 3.80
+
+
+- Support of the new camera models D2448G23C, D2448G23M, ED2448G23C,
+  ED2448G23M
+  
+- Support of the camera models C1280G12M and C1280G12C with plastic housing
+
+- Support of new functions of the C1280G12x and EC1280G12x camera models: 
+  Multi-AOI, linescan mode, rolling shutter mode
+  
+- Full support of 12/16 bit pixel formats in the uc480Viewer application
+
+- PNG images can be saved in the uc480Viewer application
+
+- Over is_ImageFormat() a list with standard image resolutions can be read.
+  These image formats can be set over the function (only CMOS cameras).
+
+- Support of the uc480 AVI functionality (uc480_tools_64.dll)   
+ 
+- New SDK functions:
+  
+  - is_AOI()
+  - is_HotPixel()
+  - is_IpConfig()
+  - is_DeviceFeature()
+  - is_Transfer()
+
+ 

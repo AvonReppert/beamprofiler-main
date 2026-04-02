@@ -1,0 +1,72 @@
+;
+; uc480 MJPEG AVI video codec
+;
+; Copyright (c) 2001-2016 OEM
+;
+[version]
+Signature="$CHICAGO$"
+Class=MEDIA
+
+[DefaultInstall]
+CopyFiles=MJPG.Files.Inf,MJPG.Files.Dll.32,MJPG.Files.Dll.64
+AddReg=MJPG.Reg,MJPG.Reg9x
+UpdateInis=MJPG.INIs
+
+[DefaultInstall.NTamd64]
+CopyFiles=MJPG.Files.Inf,MJPG.Files.Dll.32,MJPG.Files.Dll.64
+AddReg=MJPG.Reg,MJPG.RegNT
+UpdateInis=MJPG.INIs
+
+[UninstallNT]
+DelFiles=MJPG.Files.Inf,MJPG.Files.Dll.32,MJPG.Files.Dll.64
+DelReg=MJPG.Reg,MJPG.RegNT
+UpdateInis=MJPG.INIs.Del
+
+[SourceDisksNames]
+1="uc480 MJPEG CODEC","",0
+
+[SourceDisksFiles]
+uc480Mjpeg_64.inf=1
+uc480Mjpeg_64.dll=1
+uc480Mjpeg.dll=1 
+
+[DestinationDirs]
+MJPG.Files.Inf = 17
+MJPG.Files.Dll.64 = 11
+MJPG.Files.Dll.32 = 16425
+
+[MJPG.Files.Inf]
+uc480Mjpeg_64.inf
+
+[MJPG.Files.Dll.64]
+uc480Mjpeg_64.dll
+
+[MJPG.Files.Dll.32]
+uc480Mjpeg.dll
+
+[MJPG.Reg]
+HKLM,%ICMpath%
+HKLM,%ICMpath%,Description,,%description%
+HKLM,%ICMpath%,Driver,,"uc480Mjpeg_64.dll"
+HKLM,%ICMpath%,FriendlyName,,%description%
+HKLM,%uninstalpath%
+HKLM,%uninstalpath%,DisplayName,,%UninstallDispName%
+HKLM,SOFTWARE\Wow6432Node\Microsoft\Windows NT\CurrentVersion\drivers32,VIDC.MJPG,,"uc480Mjpeg.dll"
+
+[MJPG.RegNT]
+HKLM,SOFTWARE\Microsoft\Windows NT\CurrentVersion\drivers.desc,uc480Mjpeg_64.dll,,%description%
+HKLM,SOFTWARE\Wow6432Node\Microsoft\Windows NT\CurrentVersion\drivers.desc,uc480Mjpeg.dll,,%description%
+HKLM,%uninstalpath%,UninstallString,,"%11%\rundll32.exe setupapi,InstallHinfSection UninstallNT 132 %17%\uc480Mjpeg_64.inf"
+
+[MJPG.INIs]
+system.ini,drivers32,,"VIDC.MJPG=uc480Mjpeg_64.dll"
+
+[MJPG.INIs.Del]
+system.ini,drivers32,"VIDC.MJPG=uc480Mjpeg_64.dll"
+
+[Strings]
+uninstalpath="Software\Microsoft\Windows\CurrentVersion\Uninstall\uc480MjpegCodec"
+description="uc480 MJPEG AVI video codec [MJPG]"
+UninstallDispName="uc480 MJPEG AVI video codec [MJPG] (Remove only)"
+ICMpath=SYSTEM\CurrentControlSet\Control\MediaResources\icm\vidc.MJPG
+
